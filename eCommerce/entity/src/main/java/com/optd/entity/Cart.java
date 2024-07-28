@@ -13,8 +13,8 @@ import lombok.*;
 public class Cart {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "analyzerBrandSequenceGenerator")
-    @SequenceGenerator(name = "analyzerBrandSequenceGenerator", sequenceName = "seq_product", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "cartSequenceGenerator")
+    @SequenceGenerator(name = "cartSequenceGenerator", sequenceName = "seq_cart", allocationSize = 1)
     @Column(name = "cart_id", nullable = false)
     private Integer cartId;
 

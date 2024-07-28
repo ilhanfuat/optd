@@ -13,8 +13,8 @@ import lombok.*;
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "analyzerBrandSequenceGenerator")
-    @SequenceGenerator(name = "analyzerBrandSequenceGenerator", sequenceName = "seq_product", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "productSequenceGenerator")
+    @SequenceGenerator(name = "productSequenceGenerator", sequenceName = "seq_product", allocationSize = 1)
     @Column(name = "product_id", nullable = false)
     private Integer productId;
 
