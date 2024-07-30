@@ -1,6 +1,6 @@
 package com.optd.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity

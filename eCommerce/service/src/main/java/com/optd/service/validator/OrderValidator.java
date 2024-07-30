@@ -8,13 +8,14 @@ import com.optd.entity.Cart;
 import com.optd.entity.Promotion;
 import com.optd.repository.CartRepository;
 import com.optd.repository.PromotionRepository;
+import com.optd.service.security.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 @Component
-public class OrderValidator {
+public class OrderValidator extends MainService {
 
     @Autowired
     PromotionRepository promotionRepository;
@@ -27,7 +28,7 @@ public class OrderValidator {
     public void checkPromotionCode(ProductOrderDto orderDto){
         metaMessageUtil = new MetaMessageUtil();
         Promotion promotion = promotionRepository.findPromotionByPromotionCode(orderDto.getPromotionCode());
-        List<Cart> cartList = cartRepository.retrieveCartList();
+        List<Cart> cartList = cartRepository.retrieveCartList(getUserId());
         double sum = 0;
         for (Cart cart : cartList) {
             sum += (cart.getProductQuantity() * cart.getProduct().getProductPrice());

@@ -1,7 +1,8 @@
 package com.optd.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
+
 
 @Entity
 @Getter
@@ -24,5 +25,9 @@ public class Cart {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

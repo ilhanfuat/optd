@@ -1,6 +1,6 @@
 package com.optd.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.*;
 
 @Entity
@@ -43,6 +43,10 @@ public class ProductOrder {
     @ManyToOne
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }

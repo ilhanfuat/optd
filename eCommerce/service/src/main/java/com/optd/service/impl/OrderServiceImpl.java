@@ -5,20 +5,22 @@ import com.optd.common.enumeration.DeliveryStatusEnum;
 import com.optd.entity.Cart;
 import com.optd.entity.ProductOrder;
 import com.optd.entity.Promotion;
+import com.optd.entity.User;
 import com.optd.repository.CartRepository;
 import com.optd.repository.DeliveryStatusRepository;
 import com.optd.repository.ProductOrderRepository;
 import com.optd.repository.PromotionRepository;
 import com.optd.service.OrderService;
+import com.optd.service.security.MainService;
 import com.optd.service.validator.OrderValidator;
-import jakarta.transaction.Transactional;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class OrderServiceImpl implements OrderService {
+public class OrderServiceImpl extends MainService implements OrderService {
     @Autowired
     DeliveryStatusRepository deliveryStatusRepository;
     @Autowired
@@ -43,7 +45,8 @@ public class OrderServiceImpl implements OrderService {
         order.setMailAddress(orderDto.getMailAddress());
         order.setShipmentAddress(orderDto.getShipmentAddress());
         order.setDeliveryStatus(deliveryStatusRepository.findByStatusName(DeliveryStatusEnum.SİPARİŞİNİZ_ALINDI.getValue()));
-        List<Cart> cartList = cartRepository.retrieveCartList();
+        order.setUser(User.builder().userId(getUserId()).build());
+        List<Cart> cartList = cartRepository.retrieveCartList(getUserId());
         double sum = 0;
         for (Cart cart : cartList) {
             sum +=(cart.getProductQuantity() * cart.getProduct().getProductPrice());
@@ -56,6 +59,6 @@ public class OrderServiceImpl implements OrderService {
             order.setTotalPrice(sum);
 
         productOrderRepository.save(order);
-        cartRepository.deleteAllCart();
+        cartRepository.deleteCartByUserId(getUserId());
     }
 }

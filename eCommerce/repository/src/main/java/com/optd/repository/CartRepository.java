@@ -18,8 +18,8 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     @Query("select c from Cart c where c.product.productId=:productId")
     Cart retrieveCartByProductId(@Param("productId") Integer productId);
 
-    @Query("select c from Cart c")
-    List<Cart> retrieveCartList();
+    @Query("select c from Cart c where c.user.userId=:userId")
+    List<Cart> retrieveCartList(@Param("userId") Integer userId);
 
     @Modifying
     @Query(value = "delete from cart c where c.cart_id =:cartId",nativeQuery = true)
@@ -30,7 +30,7 @@ public interface CartRepository extends JpaRepository<Cart, Integer> {
     void updateProductQuantity(@Param("cartId") Integer cartId,@Param("quantity") Integer quantity);
 
     @Modifying
-    @Query(value = "delete from Cart c")
-    void deleteAllCart();
+    @Query(value = "delete from Cart c where c.user.userId=:userId")
+    void deleteCartByUserId(@Param("userId") Integer userId);
 
 }

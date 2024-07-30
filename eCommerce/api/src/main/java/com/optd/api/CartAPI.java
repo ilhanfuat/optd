@@ -18,7 +18,7 @@ public class CartAPI {
     @Autowired
     CartService cartService;
 
-    @GetMapping("/list/")
+    @GetMapping("/list")
     ResponseEntity<?> retrieveCartList() {
         return new ResponseEntity<>(new ApiSuccess("Sepet Listelendi", cartService.retrieveCartDtoList()), HttpStatus.OK);
     }
