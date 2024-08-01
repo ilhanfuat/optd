@@ -18,6 +18,12 @@ public class ProductOrder {
     @Column(name = "product_order_id", nullable = false)
     private Integer productOrderId;
 
+    @Column(name = "order_no", nullable = false)
+    private Integer orderNo;
+
+    @Column(name = "quantity",nullable = false)
+    private Integer quantity;
+
     @Column(name = "transcript_name", nullable = false)
     private String transcriptName;
 
@@ -33,8 +39,9 @@ public class ProductOrder {
     @Column(name = "shipment_address", nullable = false)
     private String shipmentAddress;
 
-    @Column(name = "total_price", nullable = false)
-    private Double totalPrice;
+    @ManyToOne
+    @JoinColumn(name = "product_id",nullable = false)
+    private Product product;
 
     @ManyToOne
     @JoinColumn(name = "delivery_status_id",nullable = false)

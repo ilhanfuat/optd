@@ -21,4 +21,9 @@ public class OrderAPI {
         orderService.finishOrder(orderDto);
         return new ResponseEntity<>(new ApiSuccess("İşlem Tamamlandı", null), HttpStatus.OK);
     }
+
+    @GetMapping("/list-order/{orderNo}")
+    ResponseEntity<?> retrieveOrderList(@PathVariable("orderNo") Integer orderNo) {
+        return new ResponseEntity<>(new ApiSuccess("İşlem Tamamlandı", orderService.retrieveProductOrderList(orderNo)), HttpStatus.OK);
+    }
 }
